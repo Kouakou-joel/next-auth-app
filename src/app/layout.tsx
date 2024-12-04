@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Nav from "@/component/nav";
+import SessionWrapper from "../../components/sessionWrapper";
+import {ToastContainer} from "react-toastify"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,15 +24,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode; 
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <SessionWrapper>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Nav></Nav>
+          <ToastContainer />
+          {children}
+        </body>
+      </html>
+    </SessionWrapper>
   );
 }
